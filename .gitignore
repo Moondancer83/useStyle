@@ -3,3 +3,7 @@
 # Jetbrains
 *.iml
 .idea
+
+# npm
+node_modules
+dist
