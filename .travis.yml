@@ -2,8 +2,6 @@ language: nodejs
 
 node_js:
   - 'node'
-  - '10'
-  - '8'
 
 before_install:
   - npm install -g typescript
