@@ -7,6 +7,3 @@
 # npm
 node_modules
 dist
-
-# Jest
-__snapshots__
