@@ -19,8 +19,6 @@ test("useStyles returns classes object", () => {
   expect(tree.props.className).toBe("makeStyles-root-1");
 });
 
-
-
 function Test2Component() {
   let classes = useNamedStyles("Test2", {root: {color: "red"}});
 
