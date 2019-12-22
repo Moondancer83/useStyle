@@ -1,4 +1,4 @@
-language: nodejs
+language: node_js
 
 node_js:
   - 'node'
@@ -39,22 +39,27 @@ branches:
 
 jobs:
   include:
-    - name: build
-      if: branch != /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+    - stage: build
       before_install: npm install -g typescript
       before_script: npm run build
       script: npm run test
-    - name: deploy
-      if: branch = /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+    - stage: deploy
       before_install: npm install -g typescript
       before_script: npm run build
       script: npm run test
+      after_success: npm pack
       deploy:
         - provider: releases
-          api_key: $GITHUB_TOKEN
+          token: $GITHUB_TOKEN
           file_glob: true
           file: "{YOURLIB}-*.tgz"
-          skip_cleanup: true
+          cleanup: false
           on:
             tags: true
             branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+
+stages:
+  - name: build
+    if: NOT (branch = /^v\d+\.\d+(\.\d+)?(-\S*)?$/)
+  - name: deploy
+    if: branch = /^v\d+\.\d+(\.\d+)?(-\S*)?$/
