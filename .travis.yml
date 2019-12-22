@@ -60,6 +60,6 @@ jobs:
 
 stages:
   - name: build
-    if: NOT (branch = /^v\d+\.\d+(\.\d+)?(-\S*)?$/)
+    if: NOT (branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/)
   - name: deploy
-    if: branch = /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+    if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/
