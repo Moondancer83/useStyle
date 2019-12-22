@@ -1,5 +1,5 @@
 {
-  "name": "@moondancer/use-styles-hook",
+  "name": "react-use-styles",
   "version": "1.0.3",
   "description": "React hook for @material-ui/styles",
   "main": "index.js",
