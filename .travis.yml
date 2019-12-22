@@ -8,31 +8,53 @@ branches:
     - master
     - /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 
-before_install:
-  - npm install -g typescript
+#before_install:
+#  - npm install -g typescript
+#
+#before_script:
+#  - npm run build
+#
+#script:
+#  - npm run test
+#
+#after_success:
+#  - npm pack
+#
+#deploy:
+#  - provider: releases
+#    api_key: $GITHUB_TOKEN
+#    file_glob: true
+#    file: "{YOURLIB}-*.tgz"
+#    skip_cleanup: true
+#    on:
+#      tags: true
+#      branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+#  - provider: npm
+#    skip_cleanup: true
+#    email: "kalee.mark@gmail.com"
+#    api_key: $NPM_TOKEN
+#    on:
+#      tags: true
+#      branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 
-before_script:
-  - npm run build
-
-script:
-  - npm run test
-
-after_success:
-  - npm pack
-
-deploy:
-  - provider: releases
-    api_key: $GITHUB_TOKEN
-    file_glob: true
-    file: "{YOURLIB}-*.tgz"
-    skip_cleanup: true
-    on:
-      tags: true
-      branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
-  - provider: npm
-    skip_cleanup: true
-    email: "kalee.mark@gmail.com"
-    api_key: $NPM_TOKEN
-    on:
-      tags: true
-      branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+jobs:
+  include:
+    - name: build
+      if: branch != /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+      before_install: npm install -g typescript
+      before_script: npm run build
+      script: npm run test
+    - name: deploy
+      if: branch = /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+      before_install: npm install -g typescript
+      before_script: npm run build
+      script: npm run test
+      deploy:
+        - provider: releases
+          api_key: $GITHUB_TOKEN
+          file_glob: true
+          file: "{YOURLIB}-*.tgz"
+          skip_cleanup: true
+          on:
+            tags: true
+            branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
