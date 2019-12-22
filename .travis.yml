@@ -19,7 +19,7 @@ jobs:
       before_install: npm install -g typescript
       script: npm run build
       after_success: npm pack
-      before_deploy: echo "Deploy to GitHub and to npm"
+      before_deploy: echo "Deploy to npm $NPM_TOKEN"
       deploy:
 #        - provider: releases
 #          token: $GITHUB_TOKEN
@@ -29,13 +29,14 @@ jobs:
 #          on:
 #            tags: true
 #            branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
-        - provider: npm
-          skip_cleanup: true
-          email: "kalee.mark@gmail.com"
-          api_key: $NPM_TOKEN
-          on:
-            tags: true
-            branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+        edge: true
+        provider: npm
+        skip_cleanup: true
+        email: "kalee.mark@gmail.com"
+        api_key: $NPM_TOKEN
+        on:
+          tags: true
+          branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 
 stages:
   - name: build
