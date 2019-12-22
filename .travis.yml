@@ -45,8 +45,7 @@ jobs:
       script: npm run test
     - stage: deploy
       before_install: npm install -g typescript
-      before_script: npm run build
-      script: npm run test
+      script: npm run build
       after_success: npm pack
       deploy:
         - provider: releases
@@ -54,6 +53,13 @@ jobs:
           file_glob: true
           file: "{YOURLIB}-*.tgz"
           cleanup: false
+          on:
+            tags: true
+            branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+        - provider: npm
+          skip_cleanup: true
+          email: "kalee.mark@gmail.com"
+          api_key: $NPM_TOKEN
           on:
             tags: true
             branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
