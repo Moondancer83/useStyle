@@ -22,18 +22,17 @@ after_success:
 
 deploy:
   - provider: releases
-    if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/
     api_key: $GITHUB_TOKEN
     file_glob: true
     file: "{YOURLIB}-*.tgz"
     skip_cleanup: true
     on:
       tags: true
+      branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
   - provider: npm
-    if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/
     skip_cleanup: true
     email: "kalee.mark@gmail.com"
     api_key: $NPM_TOKEN
     on:
       tags: true
-      branch: master
+      branch: /^v\d+\.\d+(\.\d+)?(-\S*)?$/
