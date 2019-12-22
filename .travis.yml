@@ -19,7 +19,6 @@ script:
 
 after_success:
   - npm pack
-    if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/
 
 deploy:
   #  - provider: pages
