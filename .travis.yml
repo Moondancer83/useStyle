@@ -21,12 +21,6 @@ after_success:
   - npm pack
 
 deploy:
-  #  - provider: pages
-  #    skip_cleanup: true
-  #    local_dir: docs/
-  #    github_token: $GITHUB_TOKEN
-  #    on:
-  #      tags: true
   - provider: releases
     if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/
     api_key: $GITHUB_TOKEN
@@ -35,9 +29,11 @@ deploy:
     skip_cleanup: true
     on:
       tags: true
-#  - provider: npm
-#    skip_cleanup: true
-#    email: "youremail@example.com"
-#    api_key: $NPM_TOKEN
-#    on:
-#      tags: true
+  - provider: npm
+    if: branch =~ /^v\d+\.\d+(\.\d+)?(-\S*)?$/
+    skip_cleanup: true
+    email: "kalee.mark@gmail.com"
+    api_key: $NPM_TOKEN
+    on:
+      tags: true
+      branch: master
