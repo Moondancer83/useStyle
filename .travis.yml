@@ -18,7 +18,7 @@ jobs:
     - stage: deploy
       before_install: npm install -g typescript
       script: npm run build
-      after_success: cp package.json dist && npm pack ./dist
+      after_success: cp package.json README.md dist && npm pack ./dist
       before_deploy: cd dist && echo "Deploy to npm $NPM_TOKEN"
       deploy:
 #        - provider: releases
