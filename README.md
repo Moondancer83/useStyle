@@ -5,7 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Build Status](https://travis-ci.com/Moondancer83/useStyle.svg?branch=master)](https://travis-ci.com/Moondancer83/useStyle)
 
-##Motivation
+## Motivation
 Material UI has a hook creation mechanism that allow users creating JSS based styling. However the syntax has more complexity than it should.
 ```JSX
 import React from "react";
@@ -33,10 +33,10 @@ function ComponentWithNamedStyles() {
 }
 ```
 
-##Install
+## Install
 `inpm i react-use-styles`
 
-##Usage
+## Usage
 ```JSX
 import React from "react";
 import { useStyles, useNamedStyles } from "./useStyles";
