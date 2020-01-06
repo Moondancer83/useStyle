@@ -16,9 +16,9 @@ jobs:
       before_script: npm run build
       script: npm run test
     - stage: deploy
-      before_install: npm install -g typescript
+      before_install: npm install -g typescript && cp packave.json dist
       script: npm run build
-      after_success: npm pack
+      after_success: npm pack ./dist
       before_deploy: echo "Deploy to npm $NPM_TOKEN"
       deploy:
 #        - provider: releases
